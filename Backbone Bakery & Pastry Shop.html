@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backbone - Artisan Pastry & Bakery</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- HEADER / NAVIGATION BAR -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- BRAND LOGO -->
+                <a href="https://backbonefood.com" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center font-black text-xl shadow-md group-hover:bg-brand-700 transition">
+                        B
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-extrabold tracking-tight text-gray-900">BACKBONE</span>
+                        <span class="text-[10px] font-semibold tracking-widest uppercase text-brand-600">Bakery & Pastry House</span>
+                    </div>
+                </a>
+
+                <!-- DESKTOP NAVIGATION LINKS -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-gray-600">
+                    <a href="#hero" class="hover:text-brand-600 transition">Home</a>
+                    <a href="#about" class="hover:text-brand-600 transition">Our Story</a>
+                    <a href="#products" class="hover:text-brand-600 transition">Menu & Pastries</a>
+                    <a href="#quality" class="hover:text-brand-600 transition">Freshness Guarantee</a>
+                    <a href="#contact" class="hover:text-brand-600 transition">Contact Us</a>
+                </nav>
+
+                <!-- HEADER ACTION BUTTON -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="#contact" class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-semibold shadow-sm hover:shadow-md transition text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-cake-candles"></i> Order Custom Cake
+                    </a>
+                </div>
+
+                <!-- MOBILE MENU BUTTON -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- MOBILE NAVIGATION DROPDOWN -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 px-4 pt-2 pb-6 space-y-3">
+            <a href="#hero" class="block px-3 py-2 rounded-lg text-gray-700 hover:bg-brand-50 hover:text-brand-600 font-medium">Home</a>
+            <a href="#about" class="block px-3 py-2 rounded-lg text-gray-700 hover:bg-brand-50 hover:text-brand-600 font-medium">Our Story</a>
+            <a href="#products" class="block px-3 py-2 rounded-lg text-gray-700 hover:bg-brand-50 hover:text-brand-600 font-medium">Menu & Pastries</a>
+            <a href="#quality" class="block px-3 py-2 rounded-lg text-gray-700 hover:bg-brand-50 hover:text-brand-600 font-medium">Freshness Guarantee</a>
+            <a href="#contact" class="block px-3 py-2 rounded-lg text-gray-700 hover:bg-brand-50 hover:text-brand-600 font-medium">Contact Us</a>
+            <a href="#contact" class="block w-full text-center bg-brand-600 text-white py-2.5 rounded-xl font-semibold mt-4">Order Custom Cake</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative bg-gradient-to-br from-gray-900 via-stone-900 to-black text-white overflow-hidden py-20 lg:py-28">
+        <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#f97316_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                
+                <div class="space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-500/20 text-brand-300 text-sm font-semibold border border-brand-500/30">
+                        <i class="fa-solid fa-heart text-brand-500"></i>
+                        <span>Handcrafted Daily with Pure Butter & Love</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                        Artisan Pastries & <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-amber-300">Exquisite Bakes</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                        Welcome to <strong class="text-white">Backbone</strong> (<a href="https://backbonefood.com" class="text-brand-400 underline">backbonefood.com</a>). We bake mouth-watering pastries, custom birthday cakes, and freshly baked artisan breads that make every celebration sweeter.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                        <a href="#products" class="bg-brand-600 hover:bg-brand-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <span>Explore Our Menu</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                        <a href="#contact" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-xl border border-white/20 transition backdrop-blur-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-phone"></i> Order via Phone
+                        </a>
+                    </div>
+
+                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-gray-800 text-center lg:text-left">
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-brand-500">100%</p>
+                            <p class="text-xs sm:text-sm text-gray-400">Pure Butter</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-brand-500">30+</p>
+                            <p class="text-xs sm:text-sm text-gray-400">Pastry Varieties</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-brand-500">Fresh</p>
+                            <p class="text-xs sm:text-sm text-gray-400">Baked Every Morning</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative flex justify-center">
+                    <div class="relative w-full max-w-lg">
+                        <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-brand-500 to-amber-500 opacity-30 blur-xl"></div>
+                        <img 
+                            src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800" 
+                            alt="Backbone Pastry and Bakery" 
+                            class="relative rounded-3xl shadow-2xl object-cover aspect-[4/3] w-full border border-gray-700/50"
+                            onerror="this.src='https://placehold.co/800x600/9a3412/ffffff?text=Backbone+Bakery'"
+                        >
+                        <div class="absolute -bottom-6 -left-6 bg-white text-gray-900 p-4 rounded-2xl shadow-xl border border-gray-100 hidden sm:flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-cookie-bite"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">Freshly Baked</p>
+                                <p class="text-xs text-gray-500">Zero artificial preservatives</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-600 font-bold uppercase tracking-wider text-sm">Our Story</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">Baked with Passion at Backbone</h2>
+                <div class="w-20 h-1.5 bg-brand-500 mx-auto rounded-full mt-4"></div>
+                <p class="text-gray-600 mt-6 text-lg">
+                    At <strong>Backbone</strong> (<a href="https://backbonefood.com" class="text-brand-600 underline">backbonefood.com</a>), we believe that a great pastry has the power to brighten anyone's day. Combining traditional French baking techniques with modern gourmet flavors, every creation is a masterpiece.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-brand-200 transition">
+                    <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Finest Ingredients</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        We use real dairy butter, premium Belgian chocolate, and freshly milled flour to achieve unmatched taste.
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-brand-200 transition">
+                    <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-fire-burner"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Master Bakers</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Our skilled pastry chefs handcraft every single croissant, tart, and layered cake with meticulous precision.
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-brand-200 transition">
+                    <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Custom Celebrations</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        From birthdays to weddings, we design bespoke custom cakes tailored to make your special moments unforgettable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS / PASTRIES MENU SECTION -->
+    <section id="products" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-brand-600 font-bold uppercase tracking-wider text-sm">Delicious Menu</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">Our Signature Pastries & Bakes</h2>
+                    <p class="text-gray-600 mt-2">Freshly baked daily available at backbonefood.com</p>
+                </div>
+
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0" id="filter-buttons">
+                    <button onclick="filterProducts('all')" class="filter-btn active bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition">All Items</button>
+                    <button onclick="filterProducts('pastries')" class="filter-btn bg-white hover:bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-200 transition">Pastries & Slices</button>
+                    <button onclick="filterProducts('cakes')" class="filter-btn bg-white hover:bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-200 transition">Celebration Cakes</button>
+                    <button onclick="filterProducts('bakery')" class="filter-btn bg-white hover:bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-200 transition">Breads & Croissants</button>
+                </div>
+            </div>
+
+            <!-- PRODUCT GRID -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="product-grid">
+
+                <!-- ITEM 1 -->
+                <div class="product-card pastries bg-white rounded-2xl overflow-hidden border border-gray-100 transition duration-300 flex flex-col">
+                    <div class="relative h-48 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&q=80&w=500" alt="Chocolate Truffle Pastry" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/500x300/e2e8f0/1e293b?text=Chocolate+Pastry'">
+                        <span class="absolute top-3 right-3 bg-brand-500 text-white text-xs px-2.5 py-1 rounded-full font-bold">Best Seller</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Pastries</span>
+                            <h3 class="text-lg font-bold text-gray-900 mt-1">Belgian Chocolate Truffle Pastry</h3>
+                            <p class="text-gray-500 text-sm mt-2">Rich layered chocolate sponge smothered in velvety dark chocolate ganache.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-sm font-bold text-gray-900">₹140 / piece</span>
+                            <a href="#contact" class="text-brand-600 font-bold text-sm hover:text-brand-700 flex items-center gap-1">Order <i class="fa-solid fa-chevron-right text-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ITEM 2 -->
+                <div class="product-card cakes bg-white rounded-2xl overflow-hidden border border-gray-100 transition duration-300 flex flex-col">
+                    <div class="relative h-48 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&q=80&w=500" alt="Red Velvet Cake" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/500x300/e2e8f0/1e293b?text=Red+Velvet+Cake'">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Celebration Cakes</span>
+                            <h3 class="text-lg font-bold text-gray-900 mt-1">Signature Red Velvet Cake</h3>
+                            <p class="text-gray-500 text-sm mt-2">Classic red velvet sponge layered with smooth cream cheese frosting.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-sm font-bold text-gray-900">₹750 / 500g</span>
+                            <a href="#contact" class="text-brand-600 font-bold text-sm hover:text-brand-700 flex items-center gap-1">Order <i class="fa-solid fa-chevron-right text-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ITEM 3 -->
+                <div class="product-card bakery bg-white rounded-2xl overflow-hidden border border-gray-100 transition duration-300 flex flex-col">
+                    <div class="relative h-48 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80&w=500" alt="Butter Croissant" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/500x300/e2e8f0/1e293b?text=Butter+Croissant'">
+                        <span class="absolute top-3 right-3 bg-amber-500 text-white text-xs px-2.5 py-1 rounded-full font-bold">Morning Special</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-amber-600">Breads & Croissants</span>
+                            <h3 class="text-lg font-bold text-gray-900 mt-1">Flaky French Butter Croissant</h3>
+                            <p class="text-gray-500 text-sm mt-2">Golden, buttery, and flaky pastry baked crisp every morning at dawn.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-sm font-bold text-gray-900">₹110 / piece</span>
+                            <a href="#contact" class="text-brand-600 font-bold text-sm hover:text-brand-700 flex items-center gap-1">Order <i class="fa-solid fa-chevron-right text-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ITEM 4 -->
+                <div class="product-card pastries bg-white rounded-2xl overflow-hidden border border-gray-100 transition duration-300 flex flex-col">
+                    <div class="relative h-48 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=80&w=500" alt="Fruit Pastry Tart" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/500x300/e2e8f0/1e293b?text=Fruit+Tart'">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Pastries</span>
+                            <h3 class="text-lg font-bold text-gray-900 mt-1">Fresh Berry Custard Tart</h3>
+                            <p class="text-gray-500 text-sm mt-2">Crisp tart shell filled with rich vanilla bean pastry cream and fresh seasonal berries.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-sm font-bold text-gray-900">₹160 / piece</span>
+                            <a href="#contact" class="text-brand-600 font-bold text-sm hover:text-brand-700 flex items-center gap-1">Order <i class="fa-solid fa-chevron-right text-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ITEM 5 -->
+                <div class="product-card cakes bg-white rounded-2xl overflow-hidden border border-gray-100 transition duration-300 flex flex-col">
+                    <div class="relative h-48 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=500" alt="Pineapple Pastry Cake" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/500x300/e2e8f0/1e293b?text=Pineapple+Gateau'">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Celebration Cakes</span>
+                            <h3 class="text-lg font-bold text-gray-900 mt-1">Classic Pineapple Gateau</h3>
+                            <p class="text-gray-500 text-sm mt-2">Light sponge cake soaked with pineapple syrup, whipped cream, and fresh fruit chunks.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-sm font-bold text-gray-900">₹600 / 500g</span>
+                            <a href="#contact" class="text-brand-600 font-bold text-sm hover:text-brand-700 flex items-center gap-1">Order <i class="fa-solid fa-chevron-right text-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ITEM 6 -->
+                <div class="product-card bakery bg-white rounded-2xl overflow-hidden border border-gray-100 transition duration-300 flex flex-col">
+                    <div class="relative h-48 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&q=80&w=500" alt="Blueberry Muffin" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/500x300/e2e8f0/1e293b?text=Blueberry+Muffin'">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Breads & Croissants</span>
+                            <h3 class="text-lg font-bold text-gray-900 mt-1">Jumbo Blueberry Muffin</h3>
+                            <p class="text-gray-500 text-sm mt-2">Fluffy, moist muffin bursting with sweet juicy blueberries and crumb topping.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-sm font-bold text-gray-900">₹90 / piece</span>
+                            <a href="#contact" class="text-brand-600 font-bold text-sm hover:text-brand-700 flex items-center gap-1">Order <i class="fa-solid fa-chevron-right text-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SPECIAL BANNER -->
+            <div class="mt-16 bg-gradient-to-r from-brand-800 to-brand-900 rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                <div>
+                    <h3 class="text-2xl font-bold">Planning a Party or Wedding?</h3>
+                    <p class="text-brand-100 mt-2 max-w-xl text-sm sm:text-base">Order custom tiered celebration cakes, pastry boxes, and high-tea snacks tailored for your special gatherings via backbonefood.com</p>
+                </div>
+                <a href="#contact" class="whitespace-nowrap bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-6 py-3.5 rounded-xl shadow-md transition">Book Custom Order</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- QUALITY & HYGIENE SECTION -->
+    <section id="quality" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                
+                <div>
+                    <span class="text-brand-600 font-bold uppercase tracking-wider text-sm">Our Promise</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">Strict Hygiene & Freshness Standards</h2>
+                    <p class="text-gray-600 mt-4 leading-relaxed">
+                        At Backbone, we maintain immaculate kitchen hygiene and prepare everything fresh daily. No preservatives, no leftover stock—just pure, delightful baking.
+                    </p>
+
+                    <div class="mt-8 space-y-4">
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
+                            <div class="w-10 h-10 rounded-lg bg-brand-600 text-white flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-temperature-arrow-down"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Temperature Controlled Storage</h4>
+                                <p class="text-sm text-gray-500 mt-1">All cream pastries and cakes are kept in advanced cooling units to preserve texture and flavor.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
+                            <div class="w-10 h-10 rounded-lg bg-brand-600 text-white flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-seedling"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">100% Eggless Options Available</h4>
+                                <p class="text-sm text-gray-500 mt-1">We offer a wide variety of delicious eggless pastries and cakes crafted to perfection.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
+                            <div class="w-10 h-10 rounded-lg bg-brand-600 text-white flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-box-archive"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Secure Box Packaging</h4>
+                                <p class="text-sm text-gray-500 mt-1">Elegant, sturdy cake and pastry boxes designed to protect your order during transit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&q=80&w=800" alt="Backbone Bakery Kitchen" class="rounded-3xl shadow-xl object-cover w-full h-full min-h-[400px]" onerror="this.src='https://placehold.co/800x600/ea580c/ffffff?text=Bakery+Kitchen'">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 bg-gray-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-500 font-bold uppercase tracking-wider text-sm">Get In Touch</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-2">Place Your Order or Inquire</h2>
+                <p class="text-gray-400 mt-4">Visit us, call us, or send a message for custom pastry and cake bookings at backbonefood.com</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-12">
+
+                <!-- CONTACT CARDS -->
+                <div class="space-y-6">
+                    
+                    <!-- EMAIL -->
+                    <div class="bg-gray-800/80 p-6 rounded-2xl border border-gray-700/60 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Email Us</p>
+                            <a href="mailto:backbone4251@gmail.com" class="text-lg font-bold hover:text-brand-400 transition break-all">
+                                backbone4251@gmail.com
+                            </a>
+                            <p class="text-xs text-gray-400 mt-1">Official Website: backbonefood.com</p>
+                        </div>
+                    </div>
+
+                    <!-- PHONE -->
+                    <div class="bg-gray-800/80 p-6 rounded-2xl border border-gray-700/60 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Call or WhatsApp</p>
+                            <a href="tel:+917307986313" class="text-lg font-bold hover:text-brand-400 transition">
+                                +91 7307986313
+                            </a>
+                            <p class="text-xs text-gray-400 mt-1">Open daily: 8:00 AM - 9:00 PM</p>
+                        </div>
+                    </div>
+
+                    <!-- ADDRESS -->
+                    <div class="bg-gray-800/80 p-6 rounded-2xl border border-gray-700/60 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Bakery Outlet</p>
+                            <p class="text-base font-semibold text-gray-200 mt-1">
+                                Backbone Pastry & Bakery House
+                            </p>
+                            <p class="text-sm text-gray-400">Main Market Road, India</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- FORM -->
+                <div class="lg:col-span-2 bg-gray-800/50 p-8 sm:p-10 rounded-3xl border border-gray-700/60 backdrop-blur-sm">
+                    
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Your Full Name *</label>
+                                <input type="text" required placeholder="John Doe" class="w-full bg-gray-900/80 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Phone Number *</label>
+                                <input type="tel" required placeholder="+91 9876543210" class="w-full bg-gray-900/80 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition text-sm">
+                            </div>
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Email Address *</label>
+                                <input type="email" required placeholder="name@domain.com" class="w-full bg-gray-900/80 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Order Type</label>
+                                <select class="w-full bg-gray-900/80 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition text-sm">
+                                    <option>Custom Birthday/Event Cake</option>
+                                    <option>Pastry Box Order</option>
+                                    <option>Bulk Bakery Supply</option>
+                                    <option>General Inquiry</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Your Message / Cake Requirements</label>
+                            <textarea rows="4" placeholder="Mention flavor, size, delivery date, or special notes..." class="w-full bg-gray-900/80 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition text-sm"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Send Order Inquiry</span>
+                        </button>
+                    </form>
+
+                    <div id="form-toast" class="hidden mt-4 p-4 rounded-xl bg-brand-900/80 border border-brand-500 text-brand-200 text-center text-sm font-medium">
+                        <i class="fa-solid fa-circle-check text-brand-400 mr-2"></i>
+                        Thank you! Your order inquiry has been submitted. We will contact you soon.
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-gray-400 py-12 border-t border-gray-800 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-600 text-white flex items-center justify-center font-bold">
+                    B
+                </div>
+                <span class="font-bold text-white text-base">BACKBONE</span>
+                <span class="text-xs text-gray-500">| backbonefood.com</span>
+            </div>
+
+            <p class="text-center sm:text-right text-gray-500">
+                &copy; <span id="year"></span> Backbone Pastry & Bakery House. All rights reserved.
+            </p>
+
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        function filterProducts(category) {
+            const cards = document.querySelectorAll('.product-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-600', 'text-white', 'active');
+                btn.classList.add('bg-white', 'text-gray-700');
+            });
+
+            event.currentTarget.classList.remove('bg-white', 'text-gray-700');
+            event.currentTarget.classList.add('bg-brand-600', 'text-white', 'active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const toast = document.getElementById('form-toast');
+            toast.classList.remove('hidden');
+            event.target.reset();
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
